@@ -1,0 +1,30 @@
+@model SimpleBlog.Models.Post
+
+@{
+    ViewData["Title"] = "Создать пост";
+}
+
+<div class="container">
+    <h2>Создать пост</h2>
+
+    <form asp-action="Create" method="post">
+        <label>Заголовок</label>
+        <input type="text" asp-for="Title" />
+
+        <label>Текст</label>
+        <textarea asp-for="Content"></textarea>
+
+        <label>Теги</label>
+        <select name="selectedTags" multiple>
+            @foreach(var tag in ViewBag.Tags)
+            {
+                <option value="@tag.Id" selected="@(ViewBag.SelectedTags?.Contains(tag.Id) == true ? "selected" : null)">
+                    @tag.Name
+                </option>
+            }
+        </select>
+
+        <button class="create" type="submit">Создать</button>
+        <button class="cancel" type="button" onclick="history.back()">Отмена</button>
+    </form>
+</div>

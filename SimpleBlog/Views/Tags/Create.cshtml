@@ -1,0 +1,17 @@
+@model SimpleBlog.Models.Tag
+
+@{
+    ViewData["Title"] = "Создать тег";
+}
+
+<div class="container">
+    <h2>Создать тег</h2>
+
+    <form asp-action="Create" method="post">
+        <label>Название тега</label>
+        <input type="text" asp-for="Name" />
+
+        <button class="create" type="submit">Создать</button>
+        <button class="cancel" type="button" onclick="history.back()">Отмена</button>
+    </form>
+</div>
