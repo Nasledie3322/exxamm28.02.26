@@ -1,29 +1,46 @@
 @model IEnumerable<SimpleBlog.Models.Tag>
 
 @{
-    ViewData["Title"] = "Список тегов";
+    ViewData["Title"] = "Теги";
 }
 
-<div class="container">
-    <h2>Теги</h2>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Все теги</h2>
+        <a asp-action="Create" class="btn btn-success btn-lg">
+            <i class="bi bi-plus-circle"></i> Создать новый тег
+        </a>
+    </div>
 
-    <a asp-action="Create"><button class="create">Создать тег</button></a>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Название</th>
-            </tr>
-        </thead>
-        <tbody>
+    @if (Model.Any())
+    {
+        <div class="row g-3">
             @foreach (var tag in Model)
             {
-                <tr>
-                    <td>@tag.Id</td>
-                    <td>@tag.Name</td>
-                </tr>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@tag.Name</h5>
+                            <p class="card-text text-muted small">ID: <code>@tag.Id</code></p>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <a asp-action="Edit" asp-route-id="@tag.Id" class="btn btn-warning btn-sm me-1">
+                                <i class="bi bi-pencil"></i> Изменить
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@tag.Id" class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash"></i> Удалить
+                            </a>
+                        </div>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center" role="alert">
+            <h5>Нет тегов</h5>
+            <p class="mb-0"><a asp-action="Create" class="alert-link">Создайте первый тег</a></p>
+        </div>
+    }
 </div>

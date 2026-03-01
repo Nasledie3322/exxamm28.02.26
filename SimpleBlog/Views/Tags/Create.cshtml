@@ -4,14 +4,36 @@
     ViewData["Title"] = "Создать тег";
 }
 
-<div class="container">
-    <h2>Создать тег</h2>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Создать новый тег</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label"><strong>Название тега</strong></label>
+                            <input asp-for="Name" class="form-control form-control-lg" placeholder="Введите название тега..." />
+                            <span asp-validation-for="Name" class="text-danger small d-block mt-1"></span>
+                        </div>
 
-    <form asp-action="Create" method="post">
-        <label>Название тега</label>
-        <input type="text" asp-for="Name" />
-
-        <button class="create" type="submit">Создать</button>
-        <button class="cancel" type="button" onclick="history.back()">Отмена</button>
-    </form>
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="bi bi-check"></i> Создать
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary btn-lg">Отмена</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

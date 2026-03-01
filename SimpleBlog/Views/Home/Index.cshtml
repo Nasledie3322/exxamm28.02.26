@@ -1,8 +1,43 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "SimpleBlog";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+            <div class="mb-4">
+                <h1 class="display-4 fw-bold">SimpleBlog</h1>
+                <p class="lead text-muted">Простой и удобный блог для ваших статей</p>
+            </div>
+
+            <div class="row g-3 mt-4">
+                <div class="col-md-6">
+                    <a asp-controller="Posts" asp-action="Index" class="btn btn-primary btn-lg w-100">
+                        <i class="bi bi-file-earmark-text"></i> Все посты
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a asp-controller="Tags" asp-action="Index" class="btn btn-info btn-lg w-100">
+                        <i class="bi bi-tags"></i> Все теги
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a asp-controller="Posts" asp-action="Create" class="btn btn-success btn-lg w-100">
+                        <i class="bi bi-plus-circle"></i> Новый пост
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a asp-controller="Tags" asp-action="Create" class="btn btn-warning btn-lg w-100">
+                        <i class="bi bi-plus-circle"></i> Новый тег
+                    </a>
+                </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <p class="text-muted">
+                <small>Используйте навигацию выше или выберите действие, чтобы начать работу.</small>
+            </p>
+        </div>
+    </div>
 </div>

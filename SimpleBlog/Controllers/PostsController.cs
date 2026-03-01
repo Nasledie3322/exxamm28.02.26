@@ -39,7 +39,7 @@ namespace SimpleBlog.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Post post, int[] selectedTags)
+        public async Task<IActionResult> Create(Post post, int[]? selectedTags)
         {
             if (ModelState.IsValid)
             {
@@ -48,7 +48,7 @@ namespace SimpleBlog.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.Tags = await _tagService.GetAllAsync();
-            ViewBag.SelectedTags = selectedTags;
+            ViewBag.SelectedTags = selectedTags ?? new int[] { };
             return View(post);
         }
 
@@ -64,7 +64,7 @@ namespace SimpleBlog.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Post post, int[] selectedTags)
+        public async Task<IActionResult> Edit(Post post, int[]? selectedTags)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace SimpleBlog.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.Tags = await _tagService.GetAllAsync();
-            ViewBag.SelectedTags = selectedTags;
+            ViewBag.SelectedTags = selectedTags ?? new int[] { };
             return View(post);
         }
 

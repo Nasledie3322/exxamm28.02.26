@@ -27,7 +27,7 @@ header a:hover {
     color: #ffd700;
 }
 
-.container {
+.page-container {
     max-width: 1000px;
     margin: 25px auto;
     padding: 20px;
@@ -63,26 +63,6 @@ table tr:hover {
     background-color: #f8f9fa;
 }
 
-button {
-    padding: 7px 15px;
-    margin-right: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-}
-
-button.create { background-color: #198754; color: white; }
-button.edit { background-color: #ffc107; color: #212529; }
-button.delete { background-color: #dc3545; color: white; }
-button.cancel { background-color: #6c757d; color: white; }
-
 .badge {
     display: inline-block;
     padding: 5px 10px;
@@ -92,20 +72,4 @@ button.cancel { background-color: #6c757d; color: white; }
     border-radius: 12px;
     font-size: 12px;
     font-weight: 500;
-}
-
-input[type="text"], textarea, select {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-input[type="text"]:focus, textarea:focus, select:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 5px rgba(13,110,253,0.3);
-    outline: none;
 }

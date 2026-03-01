@@ -9,13 +9,13 @@ namespace SimpleBlog.Models
         public int Id { get; set; }
 
         [Required, MaxLength(100)]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         [Required]
-        public string Content { get; set; }
+        public string Content { get; set; } = string.Empty;
 
         public DateTime PublishedAt { get; set; }
 
-        public ICollection<PostTag> PostTags { get; set; }
+        public ICollection<PostTag> PostTags { get; set; } = new List<PostTag>();
     }
 }

@@ -4,29 +4,76 @@
     ViewData["Title"] = "Редактировать пост";
 }
 
-<div class="container">
-    <h2>Редактировать пост</h2>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0">Редактировать пост</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label"><strong>Заголовок</strong></label>
+                            <input asp-for="Title" class="form-control form-control-lg" />
+                            <span asp-validation-for="Title" class="text-danger small d-block mt-1"></span>
+                        </div>
 
-    <form asp-action="Edit" method="post">
-        <input type="hidden" asp-for="Id" />
+                        <div class="mb-3">
+                            <label asp-for="Content" class="form-label"><strong>Содержание</strong></label>
+                            <textarea asp-for="Content" class="form-control" rows="8"></textarea>
+                            <span asp-validation-for="Content" class="text-danger small d-block mt-1"></span>
+                        </div>
 
-        <label>Заголовок</label>
-        <input type="text" asp-for="Title" />
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Теги</strong></label>
+                            <div class="alert alert-info" role="alert">
+                                <small>Выберите один или несколько тегов. <a asp-controller="Tags" asp-action="Create">Добавить новый тег</a></small>
+                            </div>
+                            @{ var tags = ViewBag.Tags as IEnumerable<SimpleBlog.Models.Tag> ?? new List<SimpleBlog.Models.Tag>();
+                               int[] selectedTags = ViewBag.SelectedTags as int[] ?? new int[0]; }
+                            
+                            @if (!tags.Any())
+                            {
+                                <div class="alert alert-warning">
+                                    Тегов ещё нет. <a asp-controller="Tags" asp-action="Create">Создайте первый тег</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="row g-2">
+                                    @foreach(var tag in tags)
+                                    {
+                                        var isChecked = Array.IndexOf(selectedTags, tag.Id) != -1;
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="selectedTags" value="@tag.Id" id="tag_@tag.Id" @(isChecked ? "checked" : "") />
+                                                <label class="form-check-label" for="tag_@tag.Id">
+                                                    @tag.Name
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
 
-        <label>Текст</label>
-        <textarea asp-for="Content"></textarea>
-
-        <label>Теги</label>
-        <select name="selectedTags" multiple>
-            @foreach(var tag in ViewBag.Tags)
-            {
-                <option value="@tag.Id" selected="@(ViewBag.SelectedTags?.Contains(tag.Id) == true ? "selected" : null)">
-                    @tag.Name
-                </option>
-            }
-        </select>
-
-        <button class="edit" type="submit">Сохранить</button>
-        <button class="cancel" type="button" onclick="history.back()">Отмена</button>
-    </form>
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="submit" class="btn btn-warning btn-lg">
+                                <i class="bi bi-pencil"></i> Сохранить изменения
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary btn-lg">Отмена</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
